@@ -1,4 +1,5 @@
-# Folders
+__pycache__/
 .idea/
-bdd_cours_python_avance
-*.json
+data/bdd_cours_python_avance
+data/*.json
+notebooks/*.ipynb
