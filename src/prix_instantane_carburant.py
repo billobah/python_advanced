@@ -1,9 +1,10 @@
 import requests
-import duckdb
-import json
+
+from utils.stocker_fichier import stocker_fichier
+from bdd.db import stocker_dans_bdd
 
 url_api = 'https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/records?select=id%2Clatitude%2Clongitude%2Ccp%2Cadresse%2Cville%2Cservices%2Cgazole_prix%2Cgazole_maj%2Choraires%2Csp95_maj%2Csp95_prix%2Csp98_maj%2Csp98_prix&limit={limit}&offset={offset}'
-fichier_cible = "prix_instantane_carburant.json"
+fichier_cible = "../data/prix_instantane_carburant.json"
 sql_creation = """
 CREATE TABLE IF NOT EXISTS prix_instante_raw (
     id INT,
@@ -22,7 +23,7 @@ CREATE TABLE IF NOT EXISTS prix_instante_raw (
     sp98_prix FLOAT
 )
 """
-fichier_base_de_donnees = "bdd_cours_python_avance"
+fichier_base_de_donnees = "../data/bdd_cours_python_avance"
 
 
 def telecharger_donnes_prix_carburant(url):
@@ -45,21 +46,7 @@ def telecharger_donnes_prix_carburant(url):
     return toutes_les_data
 
 
-def stocker_fichier(donnes, nom_fichier):
-    print("Stockage dans le fichier")
-    with open(nom_fichier, "w") as f:
-        for line in donnes:
-            json.dump(line, f)
-
-
-def stocker_dans_bdd(sql, fichier, bdd):
-    print("Chargement dans la BDD")
-    connection = duckdb.connect(bdd)
-    connection.sql(sql)
-    connection.sql('INSERT INTO consommation_brute_quotidienne_gaz_elec_raw '
-                   f'SELECT * FROM read_json_auto("{fichier}")')
-
-
 resultat = telecharger_donnes_prix_carburant(url_api)
 stocker_fichier(resultat, fichier_cible)
-stocker_dans_bdd(sql_creation, fichier_cible, fichier_base_de_donnees)
+nom_table = "prix_instante_raw"
+stocker_dans_bdd(sql_creation, fichier_cible, fichier_base_de_donnees, nom_table)
