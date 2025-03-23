@@ -2,6 +2,7 @@ import requests
 import duckdb
 import json
 
+
 url_api = 'https://data.economie.gouv.fr/api/explore/v2.1/catalog/datasets/prix-des-carburants-en-france-flux-instantane-v2/records?select=id%2Clatitude%2Clongitude%2Ccp%2Cadresse%2Cville%2Cservices%2Cgazole_prix%2Cgazole_maj%2Choraires%2Csp95_maj%2Csp95_prix%2Csp98_maj%2Csp98_prix&limit={limit}&offset={offset}'
 fichier_cible = "prix_instantane_carburant.json"
 sql_creation = """
@@ -22,6 +23,7 @@ CREATE TABLE IF NOT EXISTS prix_instante_raw (
     sp98_prix FLOAT
 )
 """
+
 fichier_base_de_donnees = "bdd_cours_python_avance"
 
 

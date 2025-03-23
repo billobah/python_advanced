@@ -2,6 +2,7 @@ import requests
 import duckdb
 import json
 
+
 url_api = 'https://tabular-api.data.gouv.fr/api/resources/cfc27ff9-1871-4ee8-be64-b9a290c06935/data/?Date__exact="2024-10-31"'
 fichier_cible = "consommation_brute_quotidienne_gaz_elec.json"
 sql_creation = """
@@ -20,6 +21,7 @@ CREATE TABLE IF NOT EXISTS consommation_brute_quotidienne_gaz_elec_raw (
     "Consommation brute totale (MW)" INT 
 )
 """
+
 fichier_base_de_donnees = "bdd_cours_python_avance"
 
 
