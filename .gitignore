@@ -1,2 +1,6 @@
 # Folders
 .idea/
+
+# Files
+bdd_cours_python_avance
+*.json
