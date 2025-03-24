@@ -1,0 +1,16 @@
+[
+  {
+    "type_api": "economie_gouv",
+    "dataset": "prix-des-carburants-en-france-flux-instantane-v2",
+    "fichier_cible": "../data/prix_instantane_carburant.json",
+    "fichier_base_de_donnees": "../data/bdd_cours_python_avance",
+    "fichier_sql": "prix_instantane_carburant.sql"
+  },
+  {
+    "type_api": "data_gouv",
+    "dataset": "cfc27ff9-1871-4ee8-be64-b9a290c06935",
+    "fichier_cible": "../data/consommation_brute_quotidienne_gaz_elec.json",
+    "fichier_base_de_donnees": "../data/bdd_cours_python_avance",
+    "fichier_sql": "consommation_brute_quotidienne_gaz_elec.sql"
+  }
+]
